@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "nocreeperholes",
+  "version": "1.0.0",
+  
+  "name": "Nocreeperholes",
+  "description": "Mod Description.",
+  "authors": [
+    "Me!"
+  ],
+  
+  "icon": "assets/nocreeperholes/icon.png",
+  "license": "No Licence.",
+  
+  "environment": "*",
+  
+  "entrypoints": {
+    "main": [
+      "valoeghese.nocreeperholes.Nocreeperholes"
+    ]
+  },
+  
+  "requires": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  },
+  
+  "mixins": [
+    "nocreeperholes.mixins.json"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "valoeghese.nocreeperholes.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinCreeper"
+  ],
+  "client": [
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
