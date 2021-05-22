@@ -4,7 +4,10 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinCreeper",
-    "MixinFireball"
+    "MixinFireball",
+    "MixinEnderman",
+    "MixinWither",
+    "MixinWitherSkull"
   ],
   "client": [
   ],

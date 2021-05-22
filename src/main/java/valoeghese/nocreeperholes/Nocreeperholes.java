@@ -33,11 +33,15 @@ public class Nocreeperholes implements ModInitializer {
 
 	public static GameRules.Key<BooleanRule> creeperGriefing;
 	public static GameRules.Key<BooleanRule> ghastGriefing;
+	public static GameRules.Key<BooleanRule> endermanGriefing;
+	public static GameRules.Key<BooleanRule> witherGriefing;
 
 	@Override
 	public void onInitialize() {
 		creeperGriefing = GameRuleRegistry.register("creeperGriefing", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true));
 		ghastGriefing = GameRuleRegistry.register("ghastGriefing", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true));
+		endermanGriefing = GameRuleRegistry.register("endermanGriefing", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true));
+		witherGriefing = GameRuleRegistry.register("witherGriefing", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true));
 		LOGGER.info("Adding a couple nifty gamerules~");
 	}
 }

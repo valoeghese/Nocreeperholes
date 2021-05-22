@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "id": "nocreeperholes",
-  "version": "1.0.0",
+  "version": "1.1.0",
   
   "name": "Nocreeperholes",
-  "description": "Mod Description.",
+  "description": "3 new gamerules for specific mob griefing.",
   "authors": [
-    "Me!"
+    "Valoeghese"
   ],
   
   "icon": "assets/nocreeperholes/icon.png",
@@ -19,6 +19,7 @@
       "valoeghese.nocreeperholes.Nocreeperholes"
     ]
   },
+  "accessWidener": "nocreeperholes.aw",
   
   "requires": {
     "fabricloader": ">=0.4.0",
