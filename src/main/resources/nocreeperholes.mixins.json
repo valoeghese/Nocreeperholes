@@ -3,7 +3,8 @@
   "package": "valoeghese.nocreeperholes.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinCreeper"
+    "MixinCreeper",
+    "MixinFireball"
   ],
   "client": [
   ],

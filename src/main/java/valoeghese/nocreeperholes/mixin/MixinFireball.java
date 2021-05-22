@@ -24,17 +24,17 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.mob.CreeperEntity;
+import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import valoeghese.nocreeperholes.Nocreeperholes;
 
-@Mixin(CreeperEntity.class)
-public class MixinCreeper {
+@Mixin(FireballEntity.class)
+public class MixinFireball {
 	@Redirect(
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"),
-			method = "explode")
+			method = "onCollision")
 	private Explosion redirectExplosion(World world, Entity entity, double x, double y, double z, float power, Explosion.DestructionType destructionType) {
-		return world.createExplosion(entity, x, y, z, power, world.getGameRules().getBoolean(Nocreeperholes.creeperGriefing) ? destructionType : Explosion.DestructionType.NONE);
+		return world.createExplosion(entity, x, y, z, power, world.getGameRules().getBoolean(Nocreeperholes.ghastGriefing) ? destructionType : Explosion.DestructionType.NONE);
 	}
 }

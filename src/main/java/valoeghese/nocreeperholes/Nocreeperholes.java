@@ -26,14 +26,18 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
 import net.minecraft.world.GameRules;
+import net.minecraft.world.GameRules.BooleanRule;
 
 public class Nocreeperholes implements ModInitializer {
 	public static final Logger LOGGER = LogManager.getLogger("Nocreeperholes");
 
+	public static GameRules.Key<BooleanRule> creeperGriefing;
+	public static GameRules.Key<BooleanRule> ghastGriefing;
+
 	@Override
 	public void onInitialize() {
-		GameRuleRegistry.register("creeperGriefing", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true));
-		GameRuleRegistry.register("ghastGriefing", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true));
+		creeperGriefing = GameRuleRegistry.register("creeperGriefing", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true));
+		ghastGriefing = GameRuleRegistry.register("ghastGriefing", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true));
 		LOGGER.info("Adding a couple nifty gamerules~");
 	}
 }
