@@ -32,7 +32,7 @@ import valoeghese.nocreeperholes.Nocreeperholes;
 @Mixin(FireballEntity.class)
 public class MixinFireball {
 	@Redirect(
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"),
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFZLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"),
 			method = "onCollision")
 	private Explosion redirectExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, Explosion.DestructionType destructionType) {
 		return world.createExplosion(entity, x, y, z, power, fire, world.getGameRules().getBoolean(Nocreeperholes.ghastGriefing) ? destructionType : Explosion.DestructionType.NONE);
