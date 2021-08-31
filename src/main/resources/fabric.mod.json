@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "nocreeperholes",
-  "version": "1.2.0",
+  "version": "1.2.0+gnifty1",
   
   "name": "Nocreeperholes",
   "description": "Some new gamerules for specific mob griefing.",
@@ -21,7 +21,7 @@
   },
   "accessWidener": "nocreeperholes.aw",
   
-  "requires": {
+  "depends": {
     "fabricloader": ">=0.4.0",
     "fabric": "*"
   },
