@@ -10,7 +10,7 @@
   ],
   
   "icon": "assets/nocreeperholes/icon.png",
-  "license": "No Licence.",
+  "license": "GNU LGPLv3",
   
   "environment": "*",
   
@@ -22,7 +22,7 @@
   "accessWidener": "nocreeperholes.aw",
   
   "requires": {
-    "fabricloader": ">=0.4.0",
+    "fabricloader": ">=0.9.0",
     "fabric": "*"
   },
   
