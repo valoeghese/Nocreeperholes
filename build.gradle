@@ -1,23 +1,14 @@
 plugins {
-	id 'fabric-loom' version '0.9-SNAPSHOT'
+	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
-	id "com.jfrog.artifactory" version "4.15.2"
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
-if(rootProject.file("private.gradle").exists()) { //Publishing details
-	apply from: "private.gradle"
-}
-
-archivesBaseName = "${project.archives_base_name}"
-group = "${project.maven_group}"
+archivesBaseName = project.archives_base_name
 version = "${project.mod_version}+${project.minecraft_version}"
-
-minecraft {
-	accessWidener = file("src/main/resources/nocreeperholes.aw")
-}
+group = project.maven_group
 
 repositories {
 	maven { url "https://server.bbkr.space/artifactory/libs-release" } // Cotton maven - home of Cotton projects
@@ -27,12 +18,25 @@ repositories {
 		url = "https://maven.onyxstudios.dev"
 	}
 	maven { url 'https://jitpack.io' }
+	maven {
+		name = 'Ladysnake Mods'
+		url = 'https://ladysnake.jfrog.io/artifactory/mods'
+	}
+	maven {
+		name = "Terraformers"
+		url "https://maven.terraformersmc.com/"
+	}
+}
+
+loom {
+	accessWidener = file("src/main/resources/nocreeperholes.aw")
 }
 
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
@@ -54,7 +58,7 @@ tasks.withType(JavaCompile).configureEach {
 	it.options.encoding = "UTF-8"
 
 	// Minecraft 1.17 (21w19a) upwards uses Java 16.
-	it.options.release = 16
+	it.options.release = 17
 }
 
 java {
@@ -70,58 +74,25 @@ jar {
 	}
 }
 
-// configure the maven publication
-publishing {
-	publications {
-		maven(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				classifier null
-				builtBy remapJar
-			}
+// // configure the maven publication
+// publishing {
+// 	publications {
+// 		mavenJava(MavenPublication) {
+// 			// add all the jars that should be included when publishing to maven
+// 			artifact(remapJar) {
+// 				builtBy remapJar
+// 			}
+// 			artifact(sourcesJar) {
+// 				builtBy remapSourcesJar
+// 			}
+// 		}
+// 	}
 
-			/*artifact ("${project.buildDir.absolutePath}/libs/${archivesBaseName}-${project.version}-dev.jar") { //release jar - file location not provided anywhere in loom
-				classifier "dev"
-				builtBy remapJar
-			}*/
-
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
-	}
-}
-
-artifactory {
-	if (project.hasProperty("artifactoryUsername")) {
-		contextUrl = "https://server.bbkr.space/artifactory/"
-		publish {
-			repository {
-				if (version.contains("SNAPSHOT")) {
-					repoKey = "libs-snapshot"
-				} else {
-					repoKey = "libs-release"
-				}
-
-				username = artifactoryUsername
-				password = artifactoryPassword
-			}
-			defaults {
-				publications("maven")
-
-				publishArtifacts = true
-				publishPom = true
-			}
-		}
-	} else {
-		println "Cannot configure artifactory; please define ext.artifactoryUsername and ext.artifactoryPassword before running artifactoryPublish"
-	}
-}
+// 	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
+// 	repositories {
+// 		// Add repositories to publish to here.
+// 		// Notice: This block does NOT have the same function as the block in the top level.
+// 		// The repositories here will be used for publishing your artifact, not for
+// 		// retrieving dependencies.
+// 	}
+// }
