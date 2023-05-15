@@ -33,9 +33,9 @@ import valoeghese.nocreeperholes.Nocreeperholes;
 @Mixin(WitherSkullEntity.class)
 public class MixinWitherSkull {
 	@Redirect(
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFZLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"),
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFZLnet/minecraft/world/World$ExplosionSourceType;)Lnet/minecraft/world/explosion/Explosion;"),
 			method = "onCollision")
-	private Explosion redirectExplosion(World world, Entity entity, double x, double y, double z, float power, boolean fire, Explosion.DestructionType destructionType) {
+	private Explosion redirectExplosion(World world, Entity entity, double x, double y, double z, float power, boolean createFire, World.ExplosionSourceType explosionSourceType) {
 		GameRules gameRules = world.getGameRules();
 		return world.createExplosion(
 				entity,
@@ -43,7 +43,7 @@ public class MixinWitherSkull {
 				y,
 				z,
 				power,
-				!gameRules.getBoolean(GameRules.DO_MOB_GRIEFING) ? false : gameRules.getBoolean(Nocreeperholes.witherSkullFire), // Continue Vanilla Behaviour as per ghast
-				gameRules.getBoolean(Nocreeperholes.witherGriefing) ? destructionType : Explosion.DestructionType.NONE);
+				gameRules.getBoolean(GameRules.DO_MOB_GRIEFING) && gameRules.getBoolean(Nocreeperholes.witherSkullFire), // Continue Vanilla Behaviour as per ghast
+				gameRules.getBoolean(Nocreeperholes.witherGriefing) ? explosionSourceType : World.ExplosionSourceType.NONE);
 	}
 }
